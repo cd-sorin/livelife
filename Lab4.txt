@@ -1,0 +1,333 @@
+#include "aviatura.c"
+int main()
+{
+	aviaruta *a=NULL;
+	aviaruta *b=NULL;
+	aviaruta *c;
+	aviaruta *head2=NULL,*Last;
+	int a1;
+	int b1;
+	char srch[100];
+	char savef[100];
+	char loadf[100];
+	char fname[50];
+	int n,m,com1,mod;
+	int id_devide,id_before,id_after,id_delete;
+	while(1)
+	{
+		system("cls");
+		printf("--------------------MENIU--------------------\n");
+		printf("1.Crearea listei in memoria dinamica\n");
+		printf("2.Introducerea informatiei despre elementele listei de la tatatura\n");
+		printf("3.Afisarea informatiei despre elementele listei la ecran\n");
+		printf("4.Cautarea elementului in lista\n");
+		printf("5.Modificarea cimpurilor unui element din lista\n");
+		printf("6.Determinarea adresei ultimului element din lista\n");
+		printf("7.Determinarea lungimii listei(numarul de elemente)\n");
+		printf("8.Interschimbarea a doua elemente indicate in lista\n");
+		printf("9.Sortarea listei\n");
+		printf("10.Adaugarea unui element nou la sfirsitul listei\n");
+		printf("11.Adaugarea unui element nou la inceputul listei\n");
+		printf("12.Inserarea unui element nou dupa elementul indicat al listei\n");
+		printf("13.Inserarea unui element nou inaintea elementului indicat in lista\n");
+		printf("14.Stergerea elementului indicat in lisat\n");
+		printf("15.Divizarea listei in doua liste\n");
+		printf("16.Concatenarea a doua liste\n");
+		printf("17.Salvarea informatiei despre elementele listei in fisier\n");
+		printf("18.Citirea informatiei despre elementele listei din fisier\n");
+		printf("19.Eliberarea memoriei alocate pentru lista\n");
+		printf("0.Iesire din program\n");
+		printf("\nDati comanda\n>");
+		scanf("%d",&com1);
+		switch(com1)
+		{
+			case 1:
+				system("cls");
+				printf("Introdu numarul de zboruri\n>");
+				scanf("%d",&n);
+				create(n);
+				if(!head)
+				{
+					puts("\nMemoria nu a fost alocata!\n");
+					puts("Pentru a iesi din program apasati tasta ENTER!\n");
+				}
+				system("pause");
+				break;
+			case 2:
+				system("cls");
+				printf("Introduceti datele despre zbor de la tastatura!\n");
+				read();
+				system("pause");
+				break;
+			case 3:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				show(head);
+				system("pause");
+				break;
+			case 4:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				printf("Dati ora plecarii\\destinatia pentru cautare\n>");
+				fflush(stdin);
+				gets(srch);
+				show_search(srch);
+				system("pause");
+				break;
+			case 5:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				show(head);
+				printf("\nDati indicele elementului pentru modificare\n>");
+				scanf("%d",&mod);
+				system("cls");
+				modif(mod);
+				printf("Modificarea a avut loc cu succes!\a\n");
+				system("pause");
+				break;
+			case 6:
+				system("cls");
+				printf("Dati pozitia elementului cautat:\n>");
+				scanf("%d",&mod);
+				Last=currentelement(mod);
+				if(Last==NULL)
+				{
+					printf("Nu exista asa emlement!\n");
+				}
+				else
+				{
+					printf("adresa:%p\n",Last);
+				}
+				system("pause");
+				break;
+			case 7:
+				system("cls");
+				n=sizeList();
+				printf("Lungimea listei: %d\n",n);
+				puts("Pentru a continua apasati tasta ENTER!\n");
+				system("pause");
+				break;
+			case 8:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				show(head);
+				printf("Dati numarul primului element pentru interschimbare\n>");
+				fflush(stdin);
+				scanf("%d",&a1);
+				a=search(a1);
+				printf("Dati numarul la al doilea element pentru interschimbare\n>");
+				fflush(stdin);
+				scanf("%d",&b1);
+				b=search(b1);
+				system("cls");
+				swap(a,b);
+				printf("Interchimbarea a avut loc cu succes!\a\n");
+				system("pause");
+				break;
+			case 9:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				sort();
+				printf("Lista a fost sortata cu succes!\a\n");
+				system("pause");
+				break;
+			case 10:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				add_to_end();
+				system("cls");
+				printf("Adaugarea s-a efectuat cu succes!\a\n");
+				system("pause");
+				break;
+			case 11:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+
+				fflush(stdin);
+				gets(c->numarul);
+				printf("Destinatia :");
+				fflush(stdin);
+				gets(c->destinatie);
+				printf("Ora plecari :");
+				fflush(stdin);
+				gets(c->ora_plecare);
+				printf("Ora sosirii :");
+				fflush(stdin);
+				gets(c->ora_sosire);
+				printf("Pret bilet :");
+				fflush(stdin);
+				//gets(c->pret_bilet);
+				add_to_head(c);
+				break;
+			case 12:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				show(head);
+				printf("\nIntrodu numarul de ordine:\n>");
+				scanf("%d",&id_after);
+				if(id_after>0 && id_after<=lenght())
+				{
+					system("cls");
+					add_after_id(id_after);
+				}
+				else
+				{
+					printf("\aAti introdus un numar iesit din intervalul existent!\n");
+				}
+				system("cls");
+				printf("Adaugarea s-a efectuat cu succes!\a\n");
+				system("pause");
+				break;
+			case 13:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				show(head);
+				printf("\nIntrodu numarul de ordine:\n>");
+				scanf("%d",&id_before);
+				if(id_before>0 && id_before<=lenght())
+				{
+					system("cls");
+					add_before_id(id_before);
+				}
+				else
+				{
+					printf("\aAti introdus un numar iesit din intervalul existent!\n");
+				}
+				system("cls");
+				printf("Adaugarea s-a efectuat cu succes!\a\n");
+				system("pause");
+				break;
+			case 14:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				printf("Dati indicele elementului pentru sterger\n>");
+				scanf("%d",&id_delete);
+				delete_id(id_delete);
+				system("cls");
+				printf("Stergerea a fost efectuata cu succes!\a\n");
+				system("pause");
+				break;
+			case 15:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				show(head);
+				printf("\nIntrodu indicile de unde lista va fi despartita\n>");
+				scanf("%d",&id_devide);
+				if(lenght()>1 && id_devide>0 && id_devide<lenght())
+				{
+					devide(id_devide,&head2);
+				}
+				printf("Divizarea a fost efectuata cu succes!\a\n");
+				show(head);
+				show(head2);
+				system("pause");
+				break;
+			case 16:
+				system("cls");
+				if(!head)
+				{
+					printf("Lista nu exista!\a\n");
+					system("pause");
+					break;
+				}
+				if(head2)
+				{
+					join(&head2);
+					printf("Unirea a avut loc cu succes!\n");
+				}
+				else
+				{
+					printf("\aMai intii lista trebuie despartita!\n");
+				}
+				system("pause");
+				break;
+			case 17:
+				system("cls");
+				printf("Dati numele fisierului\n>");
+				fflush(stdin);
+				gets(savef);
+				save(savef);
+				printf("Salvarea a fost efectuata cu succes!\n");
+				system("pause");
+				break;
+			case 18:
+				system("cls");
+				printf("Dati numele fisierului\n>");
+				scanf("%s",&fname);
+				if(head!=NULL)
+				{
+					freememory();
+				}
+				load(fname);
+				system("pause");
+				break;
+			case 19:
+				freememory();
+				system("pause");
+				break;
+			case 0:
+				printf("Iesire reusita din program");
+				exit(0);
+				break;
+			default:
+				printf("Nu exista asa optiune!\n");
+				break;
+		}
+	}
+	return (0);
+}
